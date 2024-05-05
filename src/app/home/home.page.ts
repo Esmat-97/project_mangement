@@ -21,8 +21,11 @@ export class HomePage {
   id:any='';
   name:any='';
   first:any='current';
+  second:any='complete';
   commingproject:any=[];
   commingcurrent:any=[];
+  commingnotstrated:any=[];
+
 
 ngOnInit(){
 
@@ -40,6 +43,13 @@ ngOnInit(){
       this.commingcurrent=res
       console.log(this.commingcurrent)
     })
+
+
+
+    this.pro.getnotstarted(this.id).subscribe(res=>{
+      this.commingnotstrated=res
+      console.log(this.commingnotstrated)
+    })
   }
 
 
@@ -51,5 +61,13 @@ this.pro.makestatuscurrent(main.value).subscribe(res=>{
 
 })
   }
+
+
+  completedata(main:any){
+    console.log(main.value)
+    this.pro.makestatuscurrent(main.value).subscribe(res=>{
+    
+    })
+      }
 
 }

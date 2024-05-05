@@ -40,7 +40,7 @@
           </div>
           <div class="card-block"  style="background-color:white;" >
             <div class="card-media-block">
-              <img src="https://habib.al-mawali.com/wp-content/uploads/Habib-AlMawali-on-Macbook-768x768.jpg"
+              <img src="../../assets/images.png"
                 class="card-media-image">
               <div class="card-media-description">
                 <span class="card-media-title">
@@ -143,9 +143,9 @@
                   <div class="alert-icon-wrapper">
                     <clr-icon class="alert-icon" shape="info"></clr-icon>
                   </div>
-                  <span class="alert-text">
-                    Shopping Cart & Hosting
-                  </span>
+                  <div  *ngFor="let n of commingnotstrated">
+                    {{n.project_name}}
+                  </div>
                 </div>
               </div>
             </div>
@@ -203,10 +203,11 @@
              <button class="btn btn-sm" type="submit">current</button>
             </form>
 
-
-          <form> 
-             <button class="btn btn-sm">Mark Done</button>
-             </form>
+            <form  #complete="ngForm" (ngSubmit)="completedata(complete)"> 
+              <input type="hidden" name="status"  [ngModel]="second">
+              <input type="hidden" name="id"  [ngModel]="i.id">
+               <button class="btn btn-sm" type="submit">complete</button>
+              </form>
           
           </span>
         </div>
