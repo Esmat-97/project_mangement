@@ -3,9 +3,10 @@ import { IonicModule } from '@ionic/angular';
 import { ClarityModule } from '@clr/angular';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
-import { ProjectService } from '../service/project.service';
+// import { ProjectService } from '../service/project.service';
 import { FormsModule } from '@angular/forms';
 import { NgFor } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +17,7 @@ import { NgFor } from '@angular/common';
 })
 export class HomePage {
 
-  constructor(private pro:ProjectService) {}
+  constructor( private htpp:HttpClient) {}
 
   id:any='';
   name:any='';
@@ -34,31 +35,51 @@ ngOnInit(){
     this.name=localStorage.getItem('name') as string;
     console.log(this.id )
 
-    this.pro.getproject(this.id).subscribe(res=>{
+    // this.pro.getproject(this.id).subscribe(res=>{
+    //   this.commingproject=res
+    //   console.log(this.commingproject)
+    // })
+
+
+    this.htpp.get(`http://192.168.1.2:80/api/projects/select/${this.id}`).subscribe(res=>{
       this.commingproject=res
-      console.log(this.commingproject)
     })
 
 
-
-    this.pro.getcurrent(this.id).subscribe(res=>{
+    this.htpp.get(`http://192.168.1.2:80/api/current-project/${this.id}`).subscribe(res=>{
       this.commingcurrent=res
-      console.log(this.commingcurrent)
     })
 
 
-
-    this.pro.getnotstarted(this.id).subscribe(res=>{
+    this.htpp.get(`http://192.168.1.2:80/api/notstarted-project/${this.id}`).subscribe(res=>{
       this.commingnotstrated=res
-      console.log(this.commingnotstrated)
     })
 
 
-
-    this.pro.getcomplete(this.id).subscribe(res=>{
+    this.htpp.get(`http://192.168.1.2:80/api/complete-project/${this.id}`).subscribe(res=>{
       this.commingcomplete=res
-      console.log(this.commingcomplete)
     })
+
+    // this.pro.getcurrent(this.id).subscribe(res=>{
+    //   this.commingcurrent=res
+    //   console.log(this.commingcurrent)
+    // })
+
+
+
+    // this.pro.getnotstarted(this.id).subscribe(res=>{
+    //   this.commingnotstrated=res
+    //   console.log(this.commingnotstrated)
+    // })
+
+
+
+    // this.pro.getcomplete(this.id).subscribe(res=>{
+    //   this.commingcomplete=res
+    //   console.log(this.commingcomplete)
+    // })
+
+
   }
 
 
@@ -66,17 +87,26 @@ ngOnInit(){
   currentdata(main:any){
 console.log(main.value)
 
-this.pro.makestatuscurrent(main.value).subscribe(res=>{
+// this.pro.makestatuscurrent(main.value).subscribe(res=>{
+// })
+
+this.htpp.put(`http://192.168.1.2:80/api/projects`,main.value).subscribe(res=>{
 
 })
+
   }
 
 
   completedata(main:any){
     console.log(main.value)
-    this.pro.makestatuscurrent(main.value).subscribe(res=>{
-    
-    })
+
+    // this.pro.makestatuscurrent(main.value).subscribe(res=>{
+    // })
+
+    this.htpp.put(`http://192.168.1.2:80/api/projects`,main.value).subscribe(res=>{
+
+})
+
       }
 
 }
