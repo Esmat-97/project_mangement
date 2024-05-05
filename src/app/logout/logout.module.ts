@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { LoginPageRoutingModule } from './login-routing.module';
+import { LogoutPageRoutingModule } from './logout-routing.module';
 
 
 
@@ -13,8 +13,8 @@ import { LoginPageRoutingModule } from './login-routing.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    LoginPageRoutingModule
+    LogoutPageRoutingModule
   ],
 
 })
-export class LoginPageModule {}
+export class LogoutPageModule {}
