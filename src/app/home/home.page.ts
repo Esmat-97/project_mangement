@@ -24,13 +24,15 @@ export class HomePage {
   second:any='complete';
   commingproject:any=[];
   commingcurrent:any=[];
-  commingnotstrated:any=[];
+  commingnotstrated:any=[]; 
+  commingcomplete:any=[]; 
 
 
 ngOnInit(){
 
     this.id=localStorage.getItem('id') as string;
     this.name=localStorage.getItem('name') as string;
+    console.log(this.id )
 
     this.pro.getproject(this.id).subscribe(res=>{
       this.commingproject=res
@@ -49,6 +51,13 @@ ngOnInit(){
     this.pro.getnotstarted(this.id).subscribe(res=>{
       this.commingnotstrated=res
       console.log(this.commingnotstrated)
+    })
+
+
+
+    this.pro.getcomplete(this.id).subscribe(res=>{
+      this.commingcomplete=res
+      console.log(this.commingcomplete)
     })
   }
 

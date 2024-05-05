@@ -22,6 +22,12 @@ export class ProjectService {
           }
 
 
+          
+      getcomplete(user_id:any) :Observable<any[]>{
+        return this.http.get<any[]>(`${HOST_NAME}/api/complete-project/${user_id}`)
+          }
+
+
   getproject(user_id:any) :Observable<any[]>{
     console.log(user_id)
     return this.http.get<any[]>(`${HOST_NAME}/api/projects/select/${user_id}`)
