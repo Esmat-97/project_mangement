@@ -1,15 +1,17 @@
-<ion-header [translucent]="true">
-  <header class="header-7">
-    <div class="header-nav">
-      hello
-    </div>
-    <div class="header-actions">
-      <a class="nav-link nav-icon" aria-label="settings">
-        <clr-icon shape="cog"></clr-icon>
-      </a>
-    </div>
-  </header>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Hello {{name}}
+    </ion-title>
+    <ion-buttons slot="end" >
+      <ion-button  routerLink="/logout">
+        Logout
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
 </ion-header>
+
+
 
 <ion-content [fullscreen]="true">
 
@@ -45,7 +47,7 @@
                   Project: eCommerce Application
                 </span>
                 <span class="card-media-text">
-                  Owner: Habib AlMawali
+                  Owner: {{name}}
                 </span>
               </div>
             </div>
@@ -54,40 +56,26 @@
           <div class="card-block"  style="background-color:white;">
             <h4 class="card-title">Tasks</h4>
 
-            <table class="table table-vertical table-compact ion-no-margin">
-              <thead>
+
+            <table class="table table-striped" >
+              <thead >
                 <tr>
-                  <th>Task</th>
-                  <th>Time</th>
-                  <th>Responsibility</th>
-                  <th>Remark</th>
+                  <th scope="col">#</th>
+                  <th scope="col">task</th>
+                  <th scope="col">responsibility</th>
+                  <th scope="col">status</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody *ngFor="let i of commingproject">
                 <tr>
-                  <td>Landing Page</td>
-                  <td>07:45 AM</td>
-                  <td>Habib</td>
-                  <td>Done</td>
+                  <th scope="row">1</th>
+                  <td>{{i.project_name}}</td>
+                  <td>{{i.responsibility}}</td>
+                  <td>{{i.status}}</td>
+              
                 </tr>
-                <tr>
-                  <td>Login Page</td>
-                  <td>09:00 AM</td>
-                  <td>John</td>
-                  <td>70%</td>
-                </tr>
-                <tr>
-                  <td>Shopping Cart</td>
-                  <td>12:30 PM</td>
-                  <td>Doe</td>
-                  <td>N/A</td>
-                </tr>
-                <tr>
-                  <td>Publish</td>
-                  <td>03:00 PM</td>
-                  <td>Habib</td>
-                  <td>N/A</td>
-                </tr>
+            
+
               </tbody>
             </table>
 
@@ -130,10 +118,13 @@
             <a href="..." class="card-link">Kudos</a>
           </div>
 
-          <div class="card-block" style="border: 2px black solid;"  style="background-color:white;">
-            <h4 class="card-title">Current Progresss</h4>
-            <p class="card-text">Working on Login Page</p>
+
+          <div class="card-block" style="background-color: white;">
+            <h4 class="card-title">Current Progress</h4>
+            <div *ngFor="let c of commingcurrent" class="card-text">{{c.project_name}}</div>
           </div>
+          
+
           <hr>
           <div class="card-block">
             <a href="..." class="card-link">More details</a>
@@ -198,46 +189,29 @@
       </div>
     </div>
 
-    <ul class="clr-timeline clr-timeline-vertical">
-      <li class="clr-timeline-step">
-        <div class="clr-timeline-step-header">07:45 AM</div>
-        <clr-icon shape="success-standard" aria-label="Completed"></clr-icon>
-        <div class="clr-timeline-step-body">
-          <span class="clr-timeline-step-title">Landing Page</span>
-          <span class="clr-timeline-step-description">Working on landing page.</span>
-        </div>
-      </li>
-      <li class="clr-timeline-step">
-        <div class="clr-timeline-step-header">09:00 AM</div>
+    <ul>
+      <li class="clr-timeline-step" *ngFor="let i of commingproject">
+        <div class="clr-timeline-step-header">{{i.date}}</div>
         <clr-icon shape="dot-circle" aria-current="true" aria-label="Current"></clr-icon>
         <div class="clr-timeline-step-body">
-          <span class="clr-timeline-step-title">Login Page</span>
+          <span class="clr-timeline-step-title">{{i.project_name}}</span>
           <span class="clr-timeline-step-description">
+
+          <form  #current="ngForm" (ngSubmit)="currentdata(current)"> 
+            <input type="hidden" name="status"  [ngModel]="first">
+            <input type="hidden" name="id"  [ngModel]="i.id">
+             <button class="btn btn-sm" type="submit">current</button>
+            </form>
+
+
+          <form> 
+             <button class="btn btn-sm">Mark Done</button>
+             </form>
           
-            <button class="btn btn-sm">Mark Done</button>
           </span>
         </div>
       </li>
-      <li class="clr-timeline-step">
-        <div class="clr-timeline-step-header">12:30 PM</div>
-        <clr-icon shape="circle" aria-label="Not started"></clr-icon>
-        <div class="clr-timeline-step-body">
-          <span class="clr-timeline-step-title">Shopping Cart</span>
-          <span class="clr-timeline-step-description">
-            <button class="btn btn-sm">Mark Done</button>
-          </span>
-        </div>
-      </li>
-      <li class="clr-timeline-step">
-        <div class="clr-timeline-step-header">03:00 PM</div>
-        <clr-icon shape="circle" aria-label="Not Started"></clr-icon>
-        <div class="clr-timeline-step-body">
-          <span class="clr-timeline-step-title">Publish</span>
-          <span class="clr-timeline-step-description">
-            <button class="btn btn-sm">Mark Done</button>
-          </span>
-        </div>
-      </li>
+    
     </ul>
 
   </div>

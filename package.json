@@ -23,6 +23,7 @@
     "@angular/router": "^17.0.2",
     "@clr/angular": "^17.0.1",
     "@ionic/angular": "^8.0.0",
+    "bootstrap": "^5.3.3",
     "ionicons": "^7.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
